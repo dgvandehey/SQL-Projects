@@ -1,0 +1,57 @@
+ SELECT*FROM tbl_habitat;
+
+ SELECT species_name, species_order FROM tbl_species WHERE species_order='3';
+
+ SELECT nutrition_type FROM tbl_nutrition WHERE nutrition_cost<600;
+
+ SELECT species_name FROM tel_nutrition WHERE nutrition_id= BETWEEN 2202 AND 2206;
+
+ SELECT a1.Species_Name, a2.Nutrition_Type FROM tbl_species, tbl_nutrition;
+
+SELECT*FROM tbl_specialist, tbl_species WHERE species_name='penguin';
+
+CREATE DATABASE db_contacts;
+
+CREATE TABLE tbl_persons(
+persons_id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+persons_fname VARCHAR(50) NOT NULL,
+persons_lname VARCHAR(50) NOT NULL,
+
+INSERT INTO tbl_persons
+               (persons_fname, persons_lname)
+VALUE
+('john', 'smith'),
+('mary', o'hansen'),
+('riley','smith'),
+('Mark','branford')
+;
+
+CREATE TABLE tbl_locations(
+contact_id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+contact_address VARCHAR(50) NOT NULL,
+contact_phone VARCHAR(50) NOT NULL
+);
+INSERT INTO tbl_locations
+(contact_address, contact_phone)
+VALUES
+('232 sw davis drive, Portland Oregon 97210', '971-333-4958')
+('2737 nw 82 drive, Hillsboro Oregon 97210', '971-323-2985')
+('1309 se portland ave, Seattle Washington 97210', '832-348-9087')
+('299 ne water court, Forest Grove Oregon 97123', '503-342-3987')
+;
+
+
+CREATE TABLE tbl_contactInfo(
+contactInfo_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+contactInfo_name VARCHAR(50) NOT NULL,
+
+contactInfo_persons INT NOT NULL CONSTRAINT fk_persons_id FOREIGN KEY REFERENCES tbl_persons(persons_id) ON UPDATE CASCADE ON DELETE CASCADE,
+
+contactInfor_locations INT NOT NULL CONSTRAINTS fk_locations_id FOREIGN KEY REFERENCES tbl_locations(locations_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+SELECT a1.persons_name, a2.persons_contact FROM tbl_contactInfo 
+INNER JOIN tbl_persons a1 ON a1.persons_id=a1.contactInfo_persons
+INNER JOIN tbl_locations a2. ON a2locations_id=a2contactInfo_locations
+WHERE contactInfo=�john�
+;
